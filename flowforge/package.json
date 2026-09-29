@@ -1,0 +1,24 @@
+{
+  "name": "flowforge",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "FlowForge — visual business automation platform",
+  "engines": { "node": ">=20" },
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,magenta \"npm run dev -w @flowforge/api\" \"npm run dev -w @flowforge/web\"",
+    "build": "npm run build -w @flowforge/shared -w @flowforge/workflow-engine -w @flowforge/database -w @flowforge/api -w @flowforge/web",
+    "test": "npm run test -w @flowforge/shared -w @flowforge/workflow-engine -w @flowforge/api",
+    "lint": "node scripts/lint.mjs",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "db:generate": "npm run db:generate -w @flowforge/database",
+    "db:migrate": "npm run db:migrate -w @flowforge/database",
+    "db:seed": "npm run db:seed -w @flowforge/database",
+    "db:reset": "npm run db:reset -w @flowforge/database"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.7.3"
+  }
+}
